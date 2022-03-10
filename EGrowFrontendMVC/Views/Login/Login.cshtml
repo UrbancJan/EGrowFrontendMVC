@@ -1,36 +1,42 @@
-﻿@model EGrowFrontendMVC.Models.UserResponse
+@model EGrowFrontendMVC.Models.UserResponse
 
 @{
     ViewData["Title"] = "Login";
 }
 
-<h1>Prijava</h1>
+<body style="background-image: url('https://cdn.discordapp.com/attachments/951048725617315860/951105606343876678/LoginPageLogoPlusBackground.png')">
 
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Login">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="username" class="control-label"></label>
-                <input asp-for="username" class="form-control" />
-                <span asp-validation-for="username" class="text-danger"></span>
+    <div class="row" style="margin-left: 85%; width:50%; font-family: 'Century Gothic'; margin-top: 25%">
+        <div class="col-md-4">
+            <h1 style="width: 350px; text-align: center; color: #204108; font-size: 35px; margin-bottom: 20px;"><b>PRIJAVA</b></h1>
+            <form asp-action="Login">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <label style="text-transform:capitalize; font-size: 20px" asp-for="username" class="control-label"></label>
+                    <input style="width: 350px" asp-for="username" class="form-control" />
+                    <span asp-validation-for="username" class="text-danger"></span>
+                </div>
+                <div class="form-group">
+                    <label style="text-transform:capitalize; font-size: 20px" asp-for="password" class="control-label"></label>
+                    <input style="width: 350px" asp-for="password" class="form-control" />
+                    <span asp-validation-for="password" class="text-danger"></span>
+                </div>
+                <div class="form-group" style="width: 350px; text-align: end">
+                    <input style="background-color: #204108; border-color:transparent; font-weight: bold" type="submit" value="PRIJAVA" class="btn btn-primary" />
+                </div>
+            </form>
+            <hr style="width:350px" />
+            <div style="width:350px">
+                <p style="text-align: center; font-size: 14px;">Še nimate uporabniškega računa? <a style="text-decoration: underline; color: #8d6029" asp-controller="Registration" asp-action="Registration">REGISTRACIJA</a></p>
             </div>
-            <div class="form-group">
-                <label asp-for="password" class="control-label"></label>
-                <input asp-for="password" class="form-control" />
-                <span asp-validation-for="password" class="text-danger"></span>
+            <div style="width:350px; text-align:end; margin-top: 10px; font-size: 14px">
+                <a style="color: gray" asp-action="Index">Back to List</a>
             </div>
-            <div class="form-group">
-                <input type="submit" value="Prijava" class="btn btn-primary" />
-            </div>
-        </form>
+        </div>
+
     </div>
-</div>
+</body>
 
-<div>
-    <a asp-action="Index">Back to List</a>
-</div>
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
