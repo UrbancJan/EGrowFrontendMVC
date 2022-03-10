@@ -1,4 +1,5 @@
 ﻿using EGrowFrontendMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -7,6 +8,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace EGrowFrontendMVC.Controllers
 {
@@ -38,7 +40,12 @@ namespace EGrowFrontendMVC.Controllers
 
                     userRes = JsonConvert.DeserializeObject<User>(res);
 
-                    return RedirectToAction("Index");
+                    this.Response.Cookies.Append("userGuid", userRes.userGuid);
+                    this.Response.Cookies.Append("username", userRes.username);
+
+                    var vrednost = this.Request.Cookies["userData"];
+
+                    return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError(string.Empty, "Napaka");
