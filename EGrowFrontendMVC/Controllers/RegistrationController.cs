@@ -1,5 +1,4 @@
 ﻿using EGrowFrontendMVC.Models;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -8,30 +7,29 @@ using System.Linq;
 using System.Net.Http;
 using System.Net.Http.Json;
 using System.Threading.Tasks;
-using System.Web;
 
 namespace EGrowFrontendMVC.Controllers
 {
-    public class LoginController : Controller
+    public class RegistrationController : Controller
     {
         public IActionResult Index()
         {
             return View();
         }
 
-        public ActionResult Login()
+        public ActionResult Registration()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(UserResponse user)
+        public ActionResult Registration(UserResponse user)
         {
             User userRes = new User();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44319/api/Login");
-                var login = client.PostAsJsonAsync<UserResponse>("Login", user);
+                client.BaseAddress = new Uri("https://localhost:44319/api/Register");
+                var login = client.PostAsJsonAsync<UserResponse>("Register", user);
                 login.Wait();
                 var result = login.Result;
                 if (result.IsSuccessStatusCode)
@@ -40,12 +38,7 @@ namespace EGrowFrontendMVC.Controllers
 
                     userRes = JsonConvert.DeserializeObject<User>(res);
 
-                    this.Response.Cookies.Append("userGuid", userRes.userGuid);
-                    this.Response.Cookies.Append("username", userRes.username);
-
-                    var userGuid = this.Request.Cookies["userGuid"];
-
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("Login", "Login");
                 }
             }
             ModelState.AddModelError(string.Empty, "Napaka");
