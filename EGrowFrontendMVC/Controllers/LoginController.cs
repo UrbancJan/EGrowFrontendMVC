@@ -1,5 +1,6 @@
 ﻿using EGrowFrontendMVC.Models;
 using Microsoft.AspNetCore.Mvc;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +17,27 @@ namespace EGrowFrontendMVC.Controllers
             return View();
         }
 
-
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
-        public ActionResult Login(User user)
+        public ActionResult Login(UserResponse user)
         {
+            User userRes = new User();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44319/api/Login");
-                var login = client.PostAsJsonAsync<User>("user", user);
-                    login.Wait();
+                var login = client.PostAsJsonAsync<UserResponse>("Login", user);
+                login.Wait();
                 var result = login.Result;
                 if (result.IsSuccessStatusCode)
                 {
+                    var res = result.Content.ReadAsStringAsync().Result;
+
+                    userRes = JsonConvert.DeserializeObject<User>(res);
+
                     return RedirectToAction("Index");
                 }
             }
