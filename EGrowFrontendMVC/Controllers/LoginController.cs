@@ -40,6 +40,7 @@ namespace EGrowFrontendMVC.Controllers
 
                     userRes = JsonConvert.DeserializeObject<User>(res);
 
+                    this.Response.Cookies.Append("userId", userRes.userId.ToString());
                     this.Response.Cookies.Append("userGuid", userRes.userGuid);
                     this.Response.Cookies.Append("username", userRes.username);
 
