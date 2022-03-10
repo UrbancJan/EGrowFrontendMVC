@@ -1,23 +1,19 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - EGrowFrontendMVC</title>
+    <title>@ViewData["Title"] - eGrowFrontendMVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
     <script src="~/js/code.js?v=100"></script>
 </head>
+
 <body>
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">EGrowFrontendMVC</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
+            <img src="https://i.ibb.co/cYSrW3M/e-Grow-Logotip.png" alt="e-Grow-Logotip" border="0" width="150" height="88" />            
+                <div style="margin-left: 12%; font-family: 'Century Gothic'; font-size: 20px; text-transform: uppercase" class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -28,17 +24,11 @@
                         <li class="nav-item" id="registracijaElement">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
                         </li>
-                      
-                        <li class="nav-item" id="registracijaNapraveElement">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="DeviceRegistration" asp-action="DeviceRegistration">Device registration</a>
-                        </li>
-                       
                         <li class="nav-item" id="odjavaElement">
                             <a class="nav-link text-dark" asp-area="">Odjava</a>
                         </li>
                     </ul>
                 </div>
-            </div>
         </nav>
     </header>
     <div class="container">
@@ -47,9 +37,9 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer style="background-color: #CAD7A0" class="border-top footer text-muted">
         <div class="container">
-            &copy; 2022 - EGrowFrontendMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2022 - eGrowFrontendMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
