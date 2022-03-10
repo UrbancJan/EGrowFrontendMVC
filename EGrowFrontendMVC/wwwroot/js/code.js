@@ -14,7 +14,8 @@
 
     function checkCookie() {
         var username = getCookie("username");
-        console.log("zooooo " + username);
+        //console.log("username:  " + username);
+        console.log("username:  " + username);
 
         //username je v cookiju
         if (username != null) {

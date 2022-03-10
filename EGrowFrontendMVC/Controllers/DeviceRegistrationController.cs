@@ -17,15 +17,21 @@ namespace EGrowFrontendMVC.Controllers
             return View();
         }
 
+   
         public ActionResult DeviceRegistration()
         {
             return View();
         }
 
-        [HttpPost]
-        public ActionResult DeviceRegistration(DeviceRegistration device)
+       // [HttpPost]
+        //public ActionResult DeviceRegistration(DeviceRegistration device)
+      /*  public ActionResult DeviceRegistration()
         {
-            User DeviceRes = new User();
+            var userGuid = this.Request.Cookies["username"];
+            Console.Write(userGuid);
+            return View();
+            /*
+            AllDeviceData DeviceRes = new AllDeviceData();
             using (var client = new HttpClient())
             {
                 client.BaseAddress = new Uri("https://localhost:44319/api/RegisterDevice");
@@ -36,13 +42,13 @@ namespace EGrowFrontendMVC.Controllers
                 {
                     var res = result.Content.ReadAsStringAsync().Result;
 
-                    DeviceRes = JsonConvert.DeserializeObject<User>(res);
+                    DeviceRes = JsonConvert.DeserializeObject<AllDeviceData>(res);
 
                     return RedirectToAction("Index", "Home");
                 }
             }
             ModelState.AddModelError(string.Empty, "Napaka");
-            return View();
-        }
+            return View();*/
+       // }
     }
 }
