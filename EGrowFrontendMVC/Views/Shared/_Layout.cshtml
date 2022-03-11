@@ -19,7 +19,9 @@
                         </li>
 
                         @{
+
                             @using Microsoft.AspNetCore.Http;
+                            //uporabnik ni prijavljen
                             if (Context.Session.GetString("userID")==null)
                             {
                                 <li class="nav-item" id="loginElement">
