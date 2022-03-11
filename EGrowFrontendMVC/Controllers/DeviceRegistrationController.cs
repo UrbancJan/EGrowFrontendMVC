@@ -36,7 +36,8 @@ namespace EGrowFrontendMVC.Controllers
             AllDeviceData DeviceRes = new AllDeviceData();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44319/api/RegisterDevice");
+                //client.BaseAddress = new Uri("https://localhost:44319/api/RegisterDevice");
+                client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "RegisterDevice");
                 var RegisterDevice = client.PostAsJsonAsync<DeviceRegistration>("RegisterDevice", deviceRegistration);
                 RegisterDevice.Wait();
                 var result = RegisterDevice.Result;

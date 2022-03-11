@@ -28,10 +28,11 @@ namespace EGrowFrontendMVC.Controllers
             User userRes = new User();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44319/api/Register");
-                var login = client.PostAsJsonAsync<UserResponse>("Register", user);
-                login.Wait();
-                var result = login.Result;
+                //client.BaseAddress = new Uri("https://localhost:44319/api/Register");
+                client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "Register");
+                var registracija = client.PostAsJsonAsync<UserResponse>("Register", user);
+                registracija.Wait();
+                var result = registracija.Result;
                 if (result.IsSuccessStatusCode)
                 {
                     var res = result.Content.ReadAsStringAsync().Result;

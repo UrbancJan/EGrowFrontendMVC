@@ -30,7 +30,8 @@ namespace EGrowFrontendMVC.Controllers
             User userRes = new User();
             using (var client = new HttpClient())
             {
-                client.BaseAddress = new Uri("https://localhost:44319/api/Login");
+                //client.BaseAddress = new Uri("https://localhost:44319/api/Login");
+                client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "Login");
                 var login = client.PostAsJsonAsync<UserResponse>("Login", user);
                 login.Wait();
                 var result = login.Result;
