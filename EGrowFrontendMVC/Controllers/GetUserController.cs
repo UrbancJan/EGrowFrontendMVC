@@ -20,25 +20,32 @@ namespace EGrowFrontendMVC.Controllers
 
         public ActionResult GetUser()
         {
-            //var userId = this.Request.Cookies["userId"];
-            var userId = HttpContext.Session.GetString("userID");
-
-            User userRes = new User();
-            using (var client = new HttpClient())
+            if (HttpContext.Session.GetString("userID") != null)
             {
-                client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "User/");
-                var getUserById = client.GetAsync(userId);
-                getUserById.Wait();
-                var result = getUserById.Result;
-                if (result.IsSuccessStatusCode)
+                //var userId = this.Request.Cookies["userId"];
+                var userId = HttpContext.Session.GetString("userID");
+
+                User userRes = new User();
+                using (var client = new HttpClient())
                 {
-                    var res = result.Content.ReadAsStringAsync().Result;
-                    userRes = JsonConvert.DeserializeObject<User>(res);
-                    return View(userRes);
+                    client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "User/");
+                    var getUserById = client.GetAsync(userId);
+                    getUserById.Wait();
+                    var result = getUserById.Result;
+                    if (result.IsSuccessStatusCode)
+                    {
+                        var res = result.Content.ReadAsStringAsync().Result;
+                        userRes = JsonConvert.DeserializeObject<User>(res);
+                        return View(userRes);
+                    }
                 }
+                ModelState.AddModelError(string.Empty, "Napaka");
+                return View();
             }
-            ModelState.AddModelError(string.Empty, "Napaka");
-            return View();
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
-        }
+    }
 }

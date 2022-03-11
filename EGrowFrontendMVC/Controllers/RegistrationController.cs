@@ -1,4 +1,5 @@
 ﻿using EGrowFrontendMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +20,14 @@ namespace EGrowFrontendMVC.Controllers
 
         public ActionResult Registration()
         {
-            return View();
+            if (HttpContext.Session.GetString("userID") == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
@@ -33,7 +41,6 @@ namespace EGrowFrontendMVC.Controllers
             User userRes = new User();
             using (var client = new HttpClient())
             {
-                //client.BaseAddress = new Uri("https://localhost:44319/api/Register");
                 client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "Register");
                 var registracija = client.PostAsJsonAsync<UserResponse>("Register", user);
                 registracija.Wait();

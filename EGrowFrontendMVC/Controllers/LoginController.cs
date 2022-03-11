@@ -21,7 +21,14 @@ namespace EGrowFrontendMVC.Controllers
 
         public ActionResult Login()
         {
-            return View();
+            if (HttpContext.Session.GetString("userID") == null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
