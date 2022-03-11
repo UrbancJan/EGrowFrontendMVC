@@ -20,12 +20,20 @@ namespace EGrowFrontendMVC.Controllers
 
         public IActionResult Index()
         {
+            var userId = this.Request.Cookies["userId"];
+            ViewBag.UserId = userId;
             return View();
         }
 
         public IActionResult Privacy()
         {
             return View();
+        }
+
+        public IActionResult Odjava()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Index", "Home");
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]

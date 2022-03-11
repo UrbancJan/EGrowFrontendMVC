@@ -47,6 +47,8 @@ namespace EGrowFrontendMVC.Controllers
 
                     var userGuid = this.Request.Cookies["userGuid"];
 
+                    //TempData["isLoggedIn"] = true;
+                    HttpContext.Session.SetString("userID", userRes.userId.ToString());
                     return RedirectToAction("Index", "Home");
                 }
             }
