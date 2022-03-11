@@ -1,0 +1,65 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+
+
+
+
+<div class="d-flex justify-content-around flex-wrap ">
+    @for (var i = 0; i < 10; i++)
+    {
+        <div class="mx-2 three-per-row mt-2">
+            <h6 class="mb-2">Rastlina 1</h6>
+            <div style="height: 250px; width: 200px" class="p-2 gradient border border-gray">
+                <div class="d-flex flex-column align-items-center p-2 bg-white py-4  border border-dark rounded-circle">
+                    <img src="./Assets/plant.png" style="max-height: 100px; max-width: 100px;" />
+                    <div class="text-center mt-1">Čas | 9 dni</div>
+                </div>
+                <div class="d-flex justify-content-around mt-3">
+                    <img src="./Assets/light.png" class="icon-25" />
+                    <span class="text-gray"> | </span>
+
+                    <img src="./Assets/water.png" class="icon-25" />
+                    <span class="text-gray"> | </span>
+                    <span class="text-gray">77°</span>
+                </div>
+            </div>
+        </div>
+    }
+
+
+</div>
+
+<style>
+    .icon-25 {
+        width: 25px;
+        height: 25px;
+    }
+
+    .gradient {
+        height: 100%;
+        background: linear-gradient(0deg, #FFF 50%, #bce8bc 50%);
+    }
+
+    .text-gray {
+        color: #969696;
+    }
+
+    .border-gray {
+        border-color: #595959;
+    }
+
+
+    .three-per-row {
+        flex-basis: 25%;
+    }
+
+    /*body{
+                display: flex;
+                justify-content: center;
+                align-content: center;
+            }*/
+</style>
