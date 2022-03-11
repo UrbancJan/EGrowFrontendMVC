@@ -25,6 +25,11 @@ namespace EGrowFrontendMVC.Controllers
         [HttpPost]
         public ActionResult Registration(UserResponse user)
         {
+            if (!ModelState.IsValid)
+            {
+                return View(user);
+            }
+
             User userRes = new User();
             using (var client = new HttpClient())
             {
