@@ -1,19 +1,35 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using EGrowFrontendMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
+using System.Collections.Generic;
+using System.Net.Http;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace EGrowFrontendMVC.Controllers
 {
     public class RastlineController : Controller
     {
         // GET: RastlineController
-        public ActionResult Index()
+        public async Task<ActionResult> IndexAsync()
         {
+            Plant[] plants = await GetAllPlants();
+            List<SensorData> sensorData = new List<SensorData>();
+            foreach (Plant plant in plants)
+            {
+                var sd = await GetSensorData(plant.sensorDataId);
+                sensorData.Add(sd);
+            }
+            ViewData["plants"] = plants;
+            ViewData["sensorData"] = sensorData;
             return View();
         }
 
-        // GET: RastlineController/Details/5
-        public ActionResult Details(int id)
+        // GET: RastlineController/Podrobnosti/5
+        public ActionResult Podrobnosti(int id)
         {
+
             return View();
         }
 
@@ -23,6 +39,29 @@ namespace EGrowFrontendMVC.Controllers
             return View();
         }
 
+        private async Task<Plant[]> GetAllPlants()
+        {
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(new Uri("https://localhost:44319/api/Plant"));
+                string body = await response.Content.ReadAsStringAsync();
+                Plant[] plants = JsonSerializer.Deserialize<Plant[]>(body);
+                return plants;
+            }
+        }
+        private async Task<SensorData> GetSensorData(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(new Uri($"https://localhost:44319/api/SensorData/{id}"));
+                string body = await response.Content.ReadAsStringAsync();
+                SensorData sensorData = JsonSerializer.Deserialize<SensorData>(body);
+                return sensorData;
+            }
+        }
+
+
+
         // POST: RastlineController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -30,7 +69,7 @@ namespace EGrowFrontendMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -51,7 +90,7 @@ namespace EGrowFrontendMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
@@ -72,7 +111,7 @@ namespace EGrowFrontendMVC.Controllers
         {
             try
             {
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(IndexAsync));
             }
             catch
             {
