@@ -1,4 +1,5 @@
 ﻿using EGrowFrontendMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -19,7 +20,8 @@ namespace EGrowFrontendMVC.Controllers
 
         public ActionResult GetUser()
         {
-             var userId = this.Request.Cookies["userId"];
+            //var userId = this.Request.Cookies["userId"];
+            var userId = HttpContext.Session.GetString("userID");
 
             User userRes = new User();
             using (var client = new HttpClient())
@@ -33,7 +35,6 @@ namespace EGrowFrontendMVC.Controllers
                     var res = result.Content.ReadAsStringAsync().Result;
                     userRes = JsonConvert.DeserializeObject<User>(res);
                     return View(userRes);
-
                 }
             }
             ModelState.AddModelError(string.Empty, "Napaka");

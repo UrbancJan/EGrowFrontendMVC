@@ -18,20 +18,20 @@
                         <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
                     </li>
                     @*<li class="nav-item" id="loginElement">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
-                    </li>
-                    <li class="nav-item" id="registracijaElement">
-                        <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
-                    </li>
-                    <li class="nav-item" id="devicesElement">
-                        <a class="nav-link text-dark" asp-controller="/devices">Naprave</a>
-                    </li>
-                    <li class="nav-item" id="rastlineElement">
-                        <a class="nav-link text-dark" asp-controller="/rastline">Rastline</a>
-                    </li>
-                    <li class="nav-item" id="odjavaElement">
-                        <a class="nav-link text-dark" asp-area="">Odjava</a>
-                    </li>*@
+            <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+        </li>
+        <li class="nav-item" id="registracijaElement">
+            <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
+        </li>
+        <li class="nav-item" id="devicesElement">
+            <a class="nav-link text-dark" asp-controller="/devices">Naprave</a>
+        </li>
+        <li class="nav-item" id="rastlineElement">
+            <a class="nav-link text-dark" asp-controller="/rastline">Rastline</a>
+        </li>
+        <li class="nav-item" id="odjavaElement">
+            <a class="nav-link text-dark" asp-area="">Odjava</a>
+        </li>*@
 
                     @{
                         @using Microsoft.AspNetCore.Http;
@@ -55,6 +55,12 @@
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Odjava">Odjava</a>
                             </li>
+
+                            <ul class="navbar-nav ml-auto">
+                                <li class="nav-item text-dark">
+                                    <a class="nav-link text-primary" asp-area="" asp-controller="GetUser" asp-action="GetUser">@Context.Session.GetString("username")</a>
+                                </li>
+                            </ul>
                         }
                     }
                 </ul>

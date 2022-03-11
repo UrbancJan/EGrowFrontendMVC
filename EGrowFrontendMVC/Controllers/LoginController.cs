@@ -49,6 +49,7 @@ namespace EGrowFrontendMVC.Controllers
 
                     //TempData["isLoggedIn"] = true;
                     HttpContext.Session.SetString("userID", userRes.userId.ToString());
+                    HttpContext.Session.SetString("username", userRes.username.ToString());
                     return RedirectToAction("Index", "Home");
                 }
             }
