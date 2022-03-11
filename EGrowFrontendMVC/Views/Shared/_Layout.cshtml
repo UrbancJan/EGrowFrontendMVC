@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - eGrowFrontendMVC</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
-    <script src="~/js/code.js?v=100"></script>
 </head>
 
 <body>
@@ -33,6 +32,25 @@
                         <li class="nav-item" id="odjavaElement">
                             <a class="nav-link text-dark" asp-area="">Odjava</a>
                         </li>
+
+                        @{
+                            @using Microsoft.AspNetCore.Http;
+                            if (Context.Session.GetString("userID")==null)
+                            {
+                                <li class="nav-item" id="loginElement">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
+                                </li>
+                                <li class="nav-item" id="registracijaElement">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Registration" asp-action="Registration">Registration</a>
+                                </li>
+                            }
+                            else
+                            {
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Odjava">Odjava</a>
+                                </li>
+                            }
+                        }
                     </ul>
                 </div>
         </nav>
@@ -42,7 +60,6 @@
             @RenderBody()
         </main>
     </div>
-
     <footer style="background-color: #CAD7A0" class="border-top footer text-muted">
         <div class="container">
             &copy; 2022 - eGrowFrontendMVC - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
