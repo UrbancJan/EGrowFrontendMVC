@@ -2,41 +2,26 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
-    var plants = (Plant[])ViewData["plants"];
-    var sensorData = (List<SensorData>)ViewData["sensorData"];
+    List<Device> devices = ((Device[])ViewData["devices"]).ToList();
 }
-
-
-
-
-
 <div class="d-flex justify-content-around flex-wrap ">
-    @for (var i = 0; i < @plants.Length; i++)
+
+    @foreach (Device device in devices)
     {
         <div class="mx-2 three-per-row mt-2">
-            <h6 class="mb-2">@plants[i].plantName</h6>
             <div style="height: 280px; width: 250px" class="p-2 gradient border border-gray">
-                <a href="/rastline/podrobnosti/@plants[i].plantId">
+                <a href="/devices/details/@device.deviceGuid">
                     <div class="d-flex flex-column align-items-center px-2 py-5 bg-white   border border-dark rounded-circle">
                         <img src="./Assets/plant.png" style="max-height: 100px; max-width: 100px;" />
                         @*<div class="text-center mt-1">Čas | 9 dni</div>*@
-                        <div class="text-gray">@sensorData.ElementAt(i).ambientTemperatureCelsius°C</div>
                     </div>
                 </a>
-                <div class="d-flex justify-content-around mt-3">
-                    <img src="./Assets/light.png" class="icon-25" />
-                    <span class="text-gray"> | </span>
-
-                    <img src="./Assets/water.png" class="icon-25" />
-                    <span class="text-gray"> | </span>
-                    <img src="./Assets/gnojilo.png" class="icon-25" />
-                </div>
+                <h4 class="mb-2 mt-2 text-center text-white">Naprava @device.deviceId</h4>
             </div>
         </div>
     }
-
-
 </div>
+
 
 <style>
     .icon-25 {
@@ -46,7 +31,7 @@
 
     .gradient {
         height: 100%;
-        background: linear-gradient(0deg, #FFF 50%, #CDD5B6 50%);
+        background: linear-gradient(0deg, #98ad5a 50%, #FFF 50%);
     }
 
     .text-gray {
