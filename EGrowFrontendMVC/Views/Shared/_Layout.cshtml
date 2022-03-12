@@ -53,12 +53,15 @@
                                 <a class="nav-link text-dark" asp-controller="/rastline">Rastline</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Odjava">Odjava</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="DeviceRegistration" asp-action="DeviceRegistration">Dodajanje nove naprave</a>
                             </li>
 
                             <ul class="navbar-nav ml-auto">
                                 <li class="nav-item text-dark">
                                     <a class="nav-link text-primary" asp-area="" asp-controller="GetUser" asp-action="GetUser">@Context.Session.GetString("username")</a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Odjava">Odjava</a>
                                 </li>
                             </ul>
                         }

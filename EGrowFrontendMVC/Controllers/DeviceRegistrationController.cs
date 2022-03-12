@@ -1,4 +1,5 @@
 ﻿using EGrowFrontendMVC.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using System;
@@ -19,24 +20,33 @@ namespace EGrowFrontendMVC.Controllers
 
         public ActionResult DeviceRegistration()
         {
-            return View();
+            if (HttpContext.Session.GetString("userID") != null)
+            {
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Index", "Home");
+            }
         }
 
         [HttpPost]
-        public ActionResult DeviceRegistration(int userid)
+        public ActionResult DeviceRegistration(DeviceRegistrationResponse deviceRegistrationResponse)
         {
-            var userGuid = this.Request.Cookies["userGuid"];
-            var deviceGuid = Guid.NewGuid();
+            if (!ModelState.IsValid)
+            {
+                return View(deviceRegistrationResponse);
+            }
+
+            var userGuid = HttpContext.Session.GetString("userGuid");
 
             DeviceRegistration deviceRegistration = new DeviceRegistration();
             deviceRegistration.userGuid = userGuid;
-            deviceRegistration.deviceGuid = deviceGuid.ToString();
-            //deviceRegistration.deviceGuid = "74bf9d34-1c09-45eb-80b9-f16b4b11180c";
+            deviceRegistration.deviceGuid = deviceRegistrationResponse.deviceGuid;
 
             AllDeviceData DeviceRes = new AllDeviceData();
             using (var client = new HttpClient())
             {
-                //client.BaseAddress = new Uri("https://localhost:44319/api/RegisterDevice");
                 client.BaseAddress = new Uri(UrlPovezava.urlPovezava + "RegisterDevice");
                 var RegisterDevice = client.PostAsJsonAsync<DeviceRegistration>("RegisterDevice", deviceRegistration);
                 RegisterDevice.Wait();
@@ -47,9 +57,13 @@ namespace EGrowFrontendMVC.Controllers
 
                     DeviceRes = JsonConvert.DeserializeObject<AllDeviceData>(res);
 
-                    return RedirectToAction("Index", "Home");
+                    //return RedirectToAction("Index", "Home");
+                    ViewBag.Success = "Uspešno dodano!";
+                    ModelState.Clear();
+                    return View();
                 }
             }
+            ModelState.AddModelError(string.Empty, "Napaka");
             return View();
         }
     }

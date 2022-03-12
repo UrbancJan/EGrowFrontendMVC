@@ -14,12 +14,12 @@
             <form asp-action="Registration">
                 <div asp-validation-summary="ModelOnly" class="text-danger"></div>
                 <div class="form-group">
-                    <label style="text-transform:capitalize; font-size: 20px" asp-for="username" class="control-label"></label>
+                    <label style="text-transform:capitalize; font-size: 20px" asp-for="username" class="control-label">Uporabiško ime</label>
                     <input style="width: 350px" asp-for="username" class="form-control" />
                     <span asp-validation-for="username" class="text-danger"></span>
                 </div>
                 <div class="form-group">
-                    <label style="text-transform:capitalize; font-size: 20px" asp-for="password" class="control-label"></label>
+                    <label style="text-transform:capitalize; font-size: 20px" asp-for="password" class="control-label">Geslo</label>
                     <input type="password" style="width: 350px" asp-for="password" class="form-control" />
                     <span asp-validation-for="password" class="text-danger"></span>
                 </div>
