@@ -35,7 +35,8 @@
 
                     @{
                         @using Microsoft.AspNetCore.Http;
-                        if (Context.Session.GetString("userID") == null)
+                        if (Context.Request.Cookies["userId"] == null)
+                        //if (Context.Session.GetString("userID") == null)
                         {
                             <li class="nav-item" id="loginElement">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Login" asp-action="Login">Login</a>
@@ -47,10 +48,10 @@
                         else
                         {
                             <li class="nav-item" id="devicesElement">
-                                <a class="nav-link text-dark" asp-controller="/devices">Naprave</a>
+                                <a class="nav-link text-dark" asp-controller="Devices" asp-action="Index">Naprave</a>
                             </li>
                             <li class="nav-item" id="rastlineElement">
-                                <a class="nav-link text-dark" asp-controller="/rastline">Rastline</a>
+                                <a class="nav-link text-dark" asp-controller="Rastline" asp-action="Index">Rastline</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link text-dark" asp-area="" asp-controller="DeviceRegistration" asp-action="DeviceRegistration">Dodajanje nove naprave</a>

@@ -5,10 +5,24 @@
     List<Device> devices = ((Device[])ViewData["devices"]).ToList();
 }
 <div class="d-flex justify-content-around flex-wrap ">
-
     @foreach (Device device in devices)
     {
-        <div class="mx-2 three-per-row mt-2">
+        <div class="mx-2 three-per-row mt-1">
+            @if (device.hasError)
+            {
+
+                <div class="d-flex justify-content-end mb-1">
+                    <img src="./Assets/klicaj.png" class="icon-25" />
+                </div>
+            }
+            
+            @if (!device.hasError)
+            {
+
+                <div class="d-flex justify-content-end mb-1 icon-25">
+                </div>
+            }
+
             <div style="height: 280px; width: 250px" class="p-2 gradient border border-gray">
                 <a href="/devices/details/@device.deviceGuid">
                     <div class="d-flex flex-column align-items-center px-2 py-5 bg-white   border border-dark rounded-circle">

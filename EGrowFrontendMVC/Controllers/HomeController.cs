@@ -1,6 +1,7 @@
 ﻿using EGrowFrontendMVC.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RestSharp;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -33,6 +34,10 @@ namespace EGrowFrontendMVC.Controllers
         public IActionResult Odjava()
         {
             HttpContext.Session.Clear();
+
+            
+            this.Response.Cookies.Delete("userId");
+
             return RedirectToAction("Index", "Home");
         }
 

@@ -27,9 +27,12 @@ namespace EGrowFrontendMVC.Controllers
         }
 
         // GET: RastlineController/Podrobnosti/5
-        public ActionResult Podrobnosti(int id)
+        public async Task<ActionResult> PodrobnostiAsync(int id)
         {
-
+            Plant plant = await GetPlant(id);
+            ViewData["plant"] = plant;
+            SensorData sensorData = await GetSensorData(plant.sensorDataId);
+            ViewData["sensorData"] = sensorData;
             return View();
         }
 
@@ -47,6 +50,16 @@ namespace EGrowFrontendMVC.Controllers
                 string body = await response.Content.ReadAsStringAsync();
                 Plant[] plants = JsonSerializer.Deserialize<Plant[]>(body);
                 return plants;
+            }
+        }
+        private async Task<Plant> GetPlant(int id)
+        {
+            using (var client = new HttpClient())
+            {
+                HttpResponseMessage response = await client.GetAsync(new Uri($"https://localhost:44319/api/Plant/{id}"));
+                string body = await response.Content.ReadAsStringAsync();
+                Plant plant = JsonSerializer.Deserialize<Plant>(body);
+                return plant;
             }
         }
         private async Task<SensorData> GetSensorData(int id)
