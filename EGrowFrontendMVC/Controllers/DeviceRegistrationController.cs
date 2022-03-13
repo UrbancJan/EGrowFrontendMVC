@@ -57,13 +57,15 @@ namespace EGrowFrontendMVC.Controllers
 
                     DeviceRes = JsonConvert.DeserializeObject<AllDeviceData>(res);
 
-                    //return RedirectToAction("Index", "Home");
+                    
                     ViewBag.Success = "Uspešno dodano!";
                     ModelState.Clear();
                     return View();
+                    //return RedirectToAction("Index", "DeviceRegistration");
                 }
             }
             ModelState.AddModelError(string.Empty, "Napaka");
+            //return RedirectToAction("Index", "DeviceRegistration");
             return View();
         }
     }
