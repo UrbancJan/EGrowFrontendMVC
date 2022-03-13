@@ -4,33 +4,48 @@
 @{
     List<Device> devices = ((Device[])ViewData["devices"]).ToList();
 }
+
+
+<h1>Naprave</h1>
 <div class="d-flex justify-content-around flex-wrap ">
     @foreach (Device device in devices)
     {
         <div class="mx-2 three-per-row mt-1">
-            @if (device.hasError)
-            {
-
-                <div class="d-flex justify-content-end mb-1">
-                    <img src="./Assets/klicaj.png" class="icon-25" />
-                </div>
-            }
-            
-            @if (!device.hasError)
-            {
-
-                <div class="d-flex justify-content-end mb-1 icon-25">
-                </div>
-            }
-
-            <div style="height: 280px; width: 250px" class="p-2 gradient border border-gray">
-                <a href="/devices/details/@device.deviceGuid">
-                    <div class="d-flex flex-column align-items-center px-2 py-5 bg-white   border border-dark rounded-circle">
-                        <img src="./Assets/plant.png" style="max-height: 100px; max-width: 100px;" />
-                        @*<div class="text-center mt-1">Čas | 9 dni</div>*@
+            <div style="max-width: 250px" class="mt-2">
+                @if (device.hasError)
+                {
+                    <div class="d-flex justify-content-end mb-1">
+                        <img src="./Assets/klicaj.png" class="icon-25" />
                     </div>
-                </a>
-                <h4 class="mb-2 mt-2 text-center text-white">Naprava @device.deviceId</h4>
+                }
+
+                @if (!device.hasError)
+                {
+                    <div class="d-flex justify-content-end mb-1 icon-25">
+                    </div>
+                }
+
+                <div style="height: 330px; width: 250px" class="p-2 gradient border border-gray">
+                    <a href="/devices/details/@device.deviceGuid">
+                        <div class="d-flex flex-column align-items-center px-2 py-5 bg-white   border border-dark rounded-circle">
+                            <img src="./Assets/plant.png" style="max-height: 100px;" class="contain" />
+                        </div>
+                    </a>
+                    <h4 class="mb-2 mt-2 text-center text-white">Naprava @device.deviceId</h4>
+
+                    <div class="d-flex justify-content-around mt-3 text-center">
+                        <div class="w-40 d-flex flex-column justify-content-start align-items-center w-25 text-center">
+                            <img src="./Assets/water.png" class="icon-25" />
+                            <div class="mt-1 text-white font-weight-bold">@device.waterTankLevel L</div>
+                        </div>
+                        <span class="w-40 text-white font-weight-bold"> | </span>
+                        <div class="w-40 d-flex flex-column justify-content-start align-items-center">
+                            <img src="./Assets/gnojilo.png" class="icon-25" />
+                            <div class="mt-1 text-white font-weight-bold">@device.fertilizerLevel L</div>
+                        </div>
+                    </div>
+
+                </div>
             </div>
         </div>
     }
@@ -41,6 +56,9 @@
     .icon-25 {
         width: 25px;
         height: 25px;
+    }
+    .w-40 {
+        width: 60px;
     }
 
     .gradient {
@@ -59,5 +77,11 @@
 
     .three-per-row {
         flex-basis: 25%;
+    }
+
+    .contain {
+        height: 100%;
+        width: 100%;
+        object-fit: contain;
     }
 </style>

@@ -10,6 +10,7 @@ namespace EGrowFrontendMVC.Controllers
 {
     public class DevicesController : Controller
     {
+        private string baseUrl = "https://localhost:44319";
         // GET: DeviceController
         public async Task<ActionResult> IndexAsync()
         {
@@ -23,11 +24,24 @@ namespace EGrowFrontendMVC.Controllers
         {
             using (var client = new HttpClient())
             {
-                string uri = $"https://localhost:44319/api/LookupDevices?userGuid={userGuid}";
+                string uri = $"{baseUrl}/api/LookupDevices?userGuid={userGuid}";
                 HttpResponseMessage response = await client.GetAsync(new Uri(uri));
                 string body = await response.Content.ReadAsStringAsync();
                 Device[] devices = JsonSerializer.Deserialize<Device[]>(body);
                 return devices;
+            }
+        }
+        
+        private async Task<DeviceData> getDeviceData(string userGuid, string deviceGuid)
+        {
+
+            using (var client = new HttpClient())
+            {
+                string uri = $"{baseUrl}/api/LatestDeviceData?deviceGuid={deviceGuid}&userGuid={userGuid}";
+                HttpResponseMessage response = await client.GetAsync(new Uri(uri));
+                string body = await response.Content.ReadAsStringAsync();
+                DeviceData deviceData = JsonSerializer.Deserialize<DeviceData>(body);
+                return deviceData;
             }
         }
 
@@ -37,8 +51,12 @@ namespace EGrowFrontendMVC.Controllers
         }
 
         // GET: DeviceController/Details/5
-        public ActionResult Details(int id)
+        public async Task<ActionResult> DetailsAsync(string id)
         {
+            string uid = getUserGuid();
+            DeviceData deviceData = await getDeviceData(uid, id);
+
+            ViewData["deviceData"] = deviceData;
             return View();
         }
 

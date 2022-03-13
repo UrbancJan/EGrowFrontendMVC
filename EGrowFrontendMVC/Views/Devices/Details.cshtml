@@ -2,4 +2,136 @@
     For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 *@
 @{
+    DeviceData device = (DeviceData)ViewData["deviceData"];
+    Plant plant = device.plant;
+
 }
+
+<h1>Naprava @device.deviceId</h1>
+
+<div class="d-flex justify-content-center mb-2">
+    <img src="/Assets/plant.png" class="img-height" />
+</div>
+
+
+
+
+<div class="tab">
+    <button class="tablinks" onclick="openCity(event, 'Device-data')">Podatki o napravi</button>
+    <button class="tablinks" onclick="openCity(event, 'Plant-data')">Podatki o rastlini</button>
+</div>
+
+<div id="Plant-data" class="tabcontent">
+    <div>
+        <div class="description-font-size mt-1"><b class="text-green">Naziv rastline: </b> @plant.plantName </div>
+        <div class="description-font-size mt-1"><b class="text-green">Tip rastline: </b> @plant.plantType </div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalna temperatura zemlje: </b> @plant.optimalSoilTemperatureCelsius°C </div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalna temperatura zraka: </b> @plant.optimalAmbientTemperatureCelsius°C</div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalni UV indeks: </b> @plant.optimalUvIndex UVI</div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalno sončno sevanje: </b> @plant.optimalSolarRadiation </div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalna vlažnost listov: </b> @plant.optimalLeafWetness </div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalna vlažnost zemlje: </b> @plant.optimalSoilHumidityPercentage %</div>
+        <div class="description-font-size mt-1"><b class="text-green">Optimalna vlažnost zraka: </b> @plant.optimalAmbientHumidityPercentage %</div>
+        <div class="description-font-size mt-1"><b class="text-green">Končna velikost rastline: </b> @plant.fullyGrownCm Cm </div>
+    </div>
+</div>
+
+<div id="Device-data" class="tabcontent">
+    <div>
+        <div class="description-font-size mt-1"><b class="text-green">Temperatura zemlje: </b> @device.soilTemperatureCelsius°C </div>
+        <div class="description-font-size mt-1"><b class="text-green">Temperatura zraka: </b> @device.ambientTemperatureCelsius°C</div>
+        <div class="description-font-size mt-1"><b class="text-green">UV indeks: </b> @device.uvIndex UVI</div>
+        <div class="description-font-size mt-1"><b class="text-green">Sončno sevanje: </b> @device.solarRadiation </div>
+        <div class="description-font-size mt-1"><b class="text-green">Vlažnost listov: </b> @device.leafWetness </div>
+        <div class="description-font-size mt-1"><b class="text-green">Vlažnost zemlje: </b> @device.soilHumidityPercentage %</div>
+        <div class="description-font-size mt-1"><b class="text-green">Vlažnost zraka: </b> @device.ambientHumidityPercentage %</div>
+        <div class="description-font-size mt-1"><b class="text-green">Velikost rastline: </b> @device.growthCm Cm </div>
+
+
+    </div>
+</div>
+
+
+
+
+
+<script>
+    function openCity(evt, cityName) {
+      var i, tabcontent, tablinks;
+      tabcontent = document.getElementsByClassName("tabcontent");
+      for (i = 0; i < tabcontent.length; i++) {
+        tabcontent[i].style.display = "none";
+      }
+      tablinks = document.getElementsByClassName("tablinks");
+      for (i = 0; i < tablinks.length; i++) {
+        tablinks[i].className = tablinks[i].className.replace(" active", "");
+      }
+      document.getElementById(cityName).style.display = "block";
+      evt.currentTarget.className += " active";
+    }
+
+    window.addEventListener('DOMContentLoaded', (event) => {
+        openCity(event, 'Device-data')
+    });
+
+</script>
+
+
+
+<style>
+    * {
+        font-family: 'Century Gothic';
+    }
+
+    .img-height {
+        max-height: 150px;
+    }
+
+    .description-font-size {
+        font-size: 1.4rem;
+    }
+
+    .text-green {
+        color: #69a668;
+    }
+
+
+
+    .tab {
+        overflow: hidden;
+        border: 1px solid #ccc;
+        background-color: #CDD5B6;
+    }
+
+        /* Style the buttons inside the tab */
+        .tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+            font-size: 1.4rem;
+            color: #8d6029;
+        }
+
+            /* Change background color of buttons on hover */
+            .tab button:hover {
+                background-color: #ddd;
+            }
+
+            /* Create an active/current tablink class */
+            .tab button.active {
+                color: white;
+                background-color: #89a72d;
+            }
+
+    /* Style the tab content */
+    .tabcontent {
+        display: none;
+        padding: 6px 12px;
+        border: 1px solid #ccc;
+        border-top: none;
+    }
+</style>
