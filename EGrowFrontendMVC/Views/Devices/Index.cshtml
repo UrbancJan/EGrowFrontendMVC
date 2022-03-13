@@ -25,10 +25,10 @@
                     </div>
                 }
 
-                <div style="height: 330px; width: 250px" class="p-2 gradient border border-gray">
+                <div style="height: 350px; width: 250px" class="p-2 gradient border border-gray">
                     <a href="/devices/details/@device.deviceGuid">
-                        <div class="d-flex flex-column align-items-center px-2 py-5 bg-white   border border-dark rounded-circle">
-                            <img src="./Assets/plant.png" style="max-height: 100px;" class="contain" />
+                        <div class="d-flex flex-column align-items-center p-2  bg-white   border border-dark rounded-2">
+                            <img src="./Assets/eGrowMachine.png" style="max-height: 200px;" />
                         </div>
                     </a>
                     <h4 class="mb-2 mt-2 text-center text-white">Naprava @device.deviceId</h4>
@@ -57,6 +57,7 @@
         width: 25px;
         height: 25px;
     }
+
     .w-40 {
         width: 60px;
     }
@@ -79,9 +80,11 @@
         flex-basis: 25%;
     }
 
-    .contain {
-        height: 100%;
-        width: 100%;
-        object-fit: contain;
+    .circle {
+        border-radius: 36%;
+    }
+
+    .rounded-2 {
+        border-radius: 36%;
     }
 </style>
